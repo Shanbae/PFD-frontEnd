@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+body {
+  /* @apply bg-white text-black dark:bg-gray-800 dark:text-white ;
+} */
+  font-family: "Customfont";
+}
+
+@font-face {
+  font-family: "Customfont";
+  src: url("../src/fonts/Roboto-VariableFont_wdth\,wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
