@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import images11 from "../Images/finance.webp";
+import images11 from "../images/finance.webp";
 
 import { Link, useNavigate } from "react-router-dom";
 
