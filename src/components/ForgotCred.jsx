@@ -1,23 +1,51 @@
 import React, { useState } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import api from "../api";
+import { toast } from "react-hot-toast";
 const ForgotCred = () => {
-  const [email, setEmail] = useState("");
+  const [emails, setEmails] = useState("");
+  const [emailvalid, setEmailValid] = useState(null);
+  const handleEmailValid = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailValid(emailRegex.test(emails));
+    if (emailRegex.test(emails) === false) {
+      toast.error("Invalid Email!!!");
+    }
+  };
+  const handlefetchUser = async () => {
+    try {
+      const response = await api.post(
+        "https://localhost:7207/api/Registration/FetchUser",
+
+        emails,
+      );
+      if (response.status === 200) {
+        toast.success("Mail has been sent!! Please verify it");
+      }
+    } catch {
+      toast.error("Somthing Wrong!!!");
+    }
+  };
   return (
     <>
       <div className="">
-        <div className="w-[400px] rounded-lg p-6 shadow-lg">
-          <h1 className="items-center pb-5 text-center text-3xl">
+        <div className="w-[400px] rounded-lg border-[0.5px] border-amber-400 p-6 shadow-2xl">
+          <h1 className="items-center pb-5 text-center text-3xl text-amber-400">
             Forgot password
           </h1>
           <input
             type="text"
-            className="w-xs border-b-2 p-1"
-            placeholder="email@"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            className="w-xs border-b-2 p-1 text-white hover:border-amber-400 focus:outline-none"
+            placeholder="Email@"
+            onChange={(e) => setEmails(e.target.value)}
+            onBlur={handleEmailValid}
+            value={emails}
           ></input>
           <div className="flex justify-end">
-            <button className="mt-7 flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 font-medium text-white shadow-md hover:bg-blue-600">
+            <button
+              className="mt-7 flex items-center gap-2 rounded-lg px-4 py-2 font-medium shadow-md hover:bg-amber-400"
+              onClick={handlefetchUser}
+            >
               <EnvelopeIcon className="h-5 w-5" />
               <span>Send Email</span>
             </button>

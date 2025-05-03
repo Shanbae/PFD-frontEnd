@@ -28,7 +28,7 @@ const App = () => {
         {/* Public Routes */}
         <Route element={<Layout />}>
           <Route path="/login" element={<Loogin />} />
-          <Route path="forgot-password" element={<ForgotCred />} />
+          <Route path="forgotpassword" element={<ForgotCred />} />
           <Route path="registration" element={<RegistrationCred />} />
         </Route>
 

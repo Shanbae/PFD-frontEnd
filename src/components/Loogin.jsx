@@ -11,6 +11,16 @@ const Loogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const handleUserName = (e) => {
+    const value = e.target.value;
+    const regex = /^[A-Za-z\s]+$/;
+    if (regex.test(value)) {
+      setUsername(value);
+    }
+    // else {
+    //   setUsername("");
+    // }
+  };
   const handleLogin = async () => {
     try {
       const response = await api.post(
@@ -49,26 +59,44 @@ const Loogin = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${images12})` }}
         ></div> */}
-        <div className="bg-opacity-50 absolute inset-0 backdrop-blur-xs"></div>
-        <div className="bg-opacity-40 relative top-32 mx-auto flex h-screen flex-col justify-center rounded-3xl border-none bg-neutral-100 shadow-2xl backdrop-blur-lg sm:h-[300px] sm:w-[95%] md:h-[350px] md:w-[80%] md:flex-row lg:h-[200px] lg:w-[85%] xl:h-[400px] xl:w-[700px]">
-          <div className="rounded-l-3xl md:w-4/5">
-            <img
+
+        <div className="bg-opacity-50 absolute inset-0">
+          <div>
+            <header className="w-full shadow-2xl shadow-black">
+              <div className="flex flex-1/2">
+                <h5 className="mt-5 text-4xl text-amber-400 hover:text-white">
+                  Welcome to Personal finance!
+                </h5>
+                <div className="flex flex-1 justify-end">
+                  <button className="mt-6 mr-15 mb-6 rounded-2xl border-2 border-gray-200 p-3 text-white transition-all duration-700 ease-in-out hover:border-amber-400">
+                    Get Started!!!
+                  </button>
+                </div>
+              </div>
+            </header>
+          </div>
+        </div>
+
+        <div className="bg-opacity-40 relative top-32 mx-auto flex h-screen flex-col justify-center rounded-3xl border-none sm:h-[300px] sm:w-[95%] md:h-[350px] md:w-[80%] md:flex-row lg:h-[200px] lg:w-[85%] xl:h-[400px] xl:w-[700px]">
+          {/* <div className="rounded-l-3xl md:w-4/5">
+             <img
               src={images11}
               alt="Finance Image"
               className="h-full w-full rounded-l-3xl"
             />
-          </div>
-          <div className="rounded-r-3xl bg-transparent md:h-full md:w-full">
-            <h1 className="mt-10 mb-10 text-center align-middle text-4xl font-bold">
+          </div>  */}
+
+          <div className="rounded-3xl border-[0.5px] border-amber-400 bg-transparent md:h-full md:w-[70%]">
+            <h1 className="mt-10 mb-10 text-center align-middle text-4xl font-bold text-amber-400">
               Login
             </h1>
             <div className="container mt-5 h-10 w-full pl-15">
               {/* <label className="font-sans text-xl font-bold">UserName:</label> */}
               <input
                 type="text"
-                className="w-4/5 border-b-2 border-b-black text-xl focus:outline-none"
+                className="w-4/5 border-b-2 border-b-black text-xl text-white transition-colors duration-500 hover:border-amber-400 focus:outline-none"
                 placeholder="UserName"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleUserName}
                 value={username}
               ></input>
               {/* </div>
@@ -76,7 +104,7 @@ const Loogin = () => {
               {/* <label className="font-sans text-xl font-bold">Password:</label> */}
               <input
                 type="text"
-                className="w-4/5 border-b-2 border-b-black pt-7 text-xl focus:outline-none"
+                className="w-4/5 border-b-2 border-b-black pt-7 text-xl text-white transition-colors duration-500 hover:border-amber-400 focus:outline-none"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -84,7 +112,7 @@ const Loogin = () => {
             </div>
             <div className="flex justify-end">
               <button
-                className="mt-24 mr-20 rounded-sm border-1 border-black bg-blue-400 pt-1 pr-3 pb-1 pl-3 transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600 hover:shadow-lg focus:ring-2 focus:ring-blue-300 focus:outline-none"
+                className="mt-24 mr-20 rounded-sm border-1 border-black pt-1 pr-3 pb-1 pl-3 transition duration-300 ease-in-out hover:scale-105 hover:bg-amber-400 hover:shadow-lg focus:ring-2 focus:ring-blue-300 focus:outline-none"
                 onClick={() => handleLogin()}
               >
                 LOGIN
@@ -93,14 +121,14 @@ const Loogin = () => {
             <div className="flex flex-col items-center">
               <Link
                 to="/ForgotPassword"
-                className="align-middle hover:text-blue-600"
+                className="align-middle hover:text-amber-500"
               >
                 Forget Password?
               </Link>
 
               <Link
                 to="/Registration"
-                className="mt-5 align-middle hover:text-blue-600"
+                className="mt-5 align-middle hover:text-amber-500"
               >
                 Register Now?
               </Link>

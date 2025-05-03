@@ -15,24 +15,32 @@ const RegistrationCred = () => {
   const [passwordvalid, setPasswordValid] = useState(null);
 
   const handleAddUser = async () => {
-    try {
-      const response = await api.post(
-        "https://localhost:7207/api/Registration/AddUser",
-        {
-          name,
-          dob,
-          email,
-          password,
-        },
-      );
-      console.log(response.data);
-      toast.success("Registration succeed!!!");
-    } catch (error) {
-      console.error(
-        toast.error("Registration failed!!!"),
-        error.response ? error.response.data : error.message,
-      );
-    }
+    if (
+      name != "" &&
+      dob != "" &&
+      email != "" &&
+      password != "" &&
+      confirmPassword != ""
+    ) {
+      try {
+        const response = await api.post(
+          "https://localhost:7207/api/Registration/AddUser",
+          {
+            name,
+            dob,
+            email,
+            password,
+          },
+        );
+        console.log(response.data);
+        toast.success("Registration succeed!!!");
+      } catch (error) {
+        console.error(
+          toast.error("Registration failed!!!"),
+          error.response ? error.response.data : error.message,
+        );
+      }
+    } else toast.error("Some fields need valid inputs !!!");
   };
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -72,13 +80,15 @@ const RegistrationCred = () => {
   return (
     <>
       <div className="">
-        <div className="w-[400px] rounded-lg bg-neutral-200 px-10 py-6 shadow-2xl">
-          <h1 className="items-center text-center text-3xl">Registration</h1>
+        <div className="w-[400px] rounded-lg border-[0.5px] border-amber-400 px-10 py-6 shadow-2xl">
+          <h1 className="items-center text-center text-3xl text-amber-400">
+            Registration
+          </h1>
           <div className="flex flex-col gap-8">
             <div className="relative">
               <input
                 type="text"
-                className="w-xs border-b-2 p-2 transition duration-100 focus:border-blue-300 focus:outline-none"
+                className="w-xs border-b-2 p-2 text-white transition-colors duration-500 hover:border-amber-400 focus:border-blue-300 focus:outline-none"
                 placeholder="Full Name"
                 onChange={(e) => handleNameChange(e)}
                 onBlur={handleValid}
@@ -87,15 +97,15 @@ const RegistrationCred = () => {
               ></input>
               {valid !== null &&
                 (valid === true ? (
-                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ) : (
-                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ))}
             </div>
 
             <input
               type="date"
-              className="w-xs border-b-2 p-2 transition duration-100 focus:border-blue-300 focus:outline-none"
+              className="w-xs border-b-2 p-2 text-white transition-colors duration-500 hover:border-amber-400 focus:border-blue-300 focus:outline-none"
               // onFocus={(e) => (e.target.type = "date")}
               // onBlur={(e) => (e.target.type = "text")}
 
@@ -106,7 +116,7 @@ const RegistrationCred = () => {
             <div className="relative">
               <input
                 type="text"
-                className="w-xs border-b-2 p-2 transition duration-100 focus:border-blue-300 focus:outline-none"
+                className="w-xs border-b-2 p-2 text-white transition-colors duration-500 hover:border-amber-400 focus:border-blue-300 focus:outline-none"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={handleEmailValid}
@@ -114,14 +124,14 @@ const RegistrationCred = () => {
               ></input>
               {emailvalid !== null &&
                 (emailvalid === true ? (
-                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ) : (
-                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ))}
             </div>
             <input
               type="password"
-              className="w-xs border-b-2 p-2 transition duration-100 focus:border-blue-300 focus:outline-none"
+              className="w-xs border-b-2 p-2 text-white transition-colors duration-500 hover:border-amber-400 focus:border-blue-300 focus:outline-none"
               placeholder="NewPassword"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -129,7 +139,7 @@ const RegistrationCred = () => {
             <div className="relative">
               <input
                 type="password"
-                className="w-xs border-b-2 p-2 transition duration-100 focus:border-blue-300 focus:outline-none"
+                className="w-xs border-b-2 p-2 text-white transition-colors duration-500 hover:border-amber-400 focus:border-blue-300 focus:outline-none"
                 placeholder="ConfirmPassword"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 onBlur={handlePassword}
@@ -137,14 +147,14 @@ const RegistrationCred = () => {
               ></input>
               {passwordvalid !== null &&
                 (passwordvalid === true ? (
-                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <CheckCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ) : (
-                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5" />
+                  <XCircleIcon className="absolute top-2 right-5 h-5 w-5 rounded-4xl bg-amber-400" />
                 ))}
             </div>
             <div className="flex justify-end">
               <button
-                className="rounded-lg border-2 border-black bg-black p-2 text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600 hover:shadow-2xl focus:ring-2 focus:ring-blue-300 focus:outline-none"
+                className="rounded-lg border-2 border-black p-2 transition duration-300 ease-in-out hover:scale-105 hover:bg-amber-400 hover:shadow-2xl focus:ring-2 focus:ring-blue-300 focus:outline-none"
                 onClick={() => handleAddUser()}
               >
                 Register
