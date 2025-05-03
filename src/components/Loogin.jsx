@@ -22,9 +22,11 @@ const Loogin = () => {
     // }
   };
   const handleLogin = async () => {
+    alert(`${import.meta.env.VITE_REA}/api/Login/Login`);
     try {
       const response = await api.post(
-        "https://localhost:7207/api/Login/Login",
+        // "https://localhost:7207/api/Login/Login",   //this only for localhost
+        `${process.env.REACT_APP_API_URL}/api/Login/Login`,
         {
           username,
           password,

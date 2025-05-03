@@ -15,8 +15,8 @@ const ForgotCred = () => {
   const handlefetchUser = async () => {
     try {
       const response = await api.post(
-        "https://localhost:7207/api/Registration/FetchUser",
-
+        // "https://localhost:7207/api/Registration/FetchUser",
+        `${import.meta.env.VITE_REA}/api/Registration/FetchUser`,
         emails,
       );
       if (response.status === 200) {

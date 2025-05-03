@@ -24,7 +24,8 @@ const RegistrationCred = () => {
     ) {
       try {
         const response = await api.post(
-          "https://localhost:7207/api/Registration/AddUser",
+          //"https://localhost:7207/api/Registration/AddUser",
+          `${import.meta.env.VITE_REA}/api/Registration/AddUser`,
           {
             name,
             dob,
