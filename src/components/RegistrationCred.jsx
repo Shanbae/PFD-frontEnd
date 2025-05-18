@@ -81,7 +81,7 @@ const RegistrationCred = () => {
   return (
     <>
       <div className="">
-        <div className="w-[400px] rounded-lg border-[0.5px] border-amber-400 px-10 py-6 shadow-2xl">
+        <div className="w-[400px] rounded-lg px-10 py-6 shadow-2xl md:border-[0.5px] md:border-amber-400">
           <h1 className="items-center text-center text-3xl text-amber-400">
             Registration
           </h1>

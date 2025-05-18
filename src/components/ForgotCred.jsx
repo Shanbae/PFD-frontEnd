@@ -29,7 +29,7 @@ const ForgotCred = () => {
   return (
     <>
       <div className="">
-        <div className="w-[400px] rounded-lg border-[0.5px] border-amber-400 p-6 shadow-2xl">
+        <div className="w-[400px] rounded-lg p-6 shadow-2xl md:border-[0.5px] md:border-amber-400">
           <h1 className="items-center pb-5 text-center text-3xl text-amber-400">
             Forgot password
           </h1>

@@ -22,11 +22,10 @@ const Loogin = () => {
     // }
   };
   const handleLogin = async () => {
-    alert(`${import.meta.env.VITE_REA}/api/Login/Login`);
     try {
       const response = await api.post(
         // "https://localhost:7207/api/Login/Login",   //this only for localhost
-        `${process.env.REACT_APP_API_URL}/api/Login/Login`,
+        `${import.meta.env.VITE_REA}/api/Login/Login`,
         {
           username,
           password,
@@ -88,7 +87,7 @@ const Loogin = () => {
             />
           </div>  */}
 
-          <div className="rounded-3xl border-[0.5px] border-amber-400 bg-transparent md:h-full md:w-[70%]">
+          <div className="w-fit rounded-3xl bg-transparent p-1 md:h-full md:w-[70%] md:border-[0.5px] md:border-amber-400">
             <h1 className="mt-10 mb-10 text-center align-middle text-4xl font-bold text-amber-400">
               Login
             </h1>

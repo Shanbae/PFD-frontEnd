@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Footer from "./Footer";
 
 const Layout = () => {
   const [showback, setShowBack] = useState(false);
@@ -11,7 +12,7 @@ const Layout = () => {
     navigate("/Login");
   };
   return (
-    <div className="bg-opacity-60 fixed min-h-screen w-full bg-[#303030] bg-gradient-to-br backdrop-blur-3xl">
+    <div className="bg-opacity-60 fixed h-screen min-h-screen w-full overflow-auto bg-[#303030] bg-gradient-to-br backdrop-blur-3xl">
       <div className="flex-col items-start justify-between">
         {location.pathname != "/Login" && (
           <button
@@ -25,6 +26,9 @@ const Layout = () => {
 
       <div className="flex min-h-screen items-center justify-center">
         <Outlet />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );
