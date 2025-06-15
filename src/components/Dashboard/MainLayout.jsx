@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Dashboard/Header";
 import Sidebar from "../Dashboard/Sidebar";
 import { Outlet } from "react-router-dom";
-import Home from "../Dashboard/Home";
-import SubHome1 from "./SubHome1";
 import Footer from "./Footer";
-
+import api from "../../api";
 const MainLayout = () => {
   const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
+  const [dashBoardData, setdashBoardData] = useState(false);
 
   const toggleSideBar = () => {
     setSideBarIsOpen(!sideBarIsOpen);
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    api
+      .get("https://localhost:7207/api/Login/DashBoard", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setdashBoardData(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}

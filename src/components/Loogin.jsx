@@ -10,6 +10,8 @@ import { toast } from "react-hot-toast";
 const Loogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [emailvalid, setEmailValid] = useState(null);
   const navigate = useNavigate();
   const handleUserName = (e) => {
     const value = e.target.value;
@@ -21,10 +23,17 @@ const Loogin = () => {
     //   setUsername("");
     // }
   };
+  const handleEmailValid = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailValid(emailRegex.test(username));
+    if (emailRegex.test(username) === false) {
+      toast.error("Invalid Email!!!");
+    }
+  };
   const handleLogin = async () => {
     try {
       const response = await api.post(
-        // "https://localhost:7207/api/Login/Login",   //this only for localhost
+        //"https://localhost:7207/api/Login/Login", //this only for localhost
         `${import.meta.env.VITE_REA}/api/Login/Login`,
         {
           username,
@@ -40,8 +49,11 @@ const Loogin = () => {
       console.log(response.status);
 
       if (response.status === 200) {
-        toast.success("Use loggedin!!!");
-        localStorage;
+        toast.success("User loggedin!!!");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.user.name);
+        alert(response.data.user.name);
+
         navigate("/Dashboard");
       } else {
         toast.error("Invalid User !!!");
@@ -96,8 +108,9 @@ const Loogin = () => {
               <input
                 type="text"
                 className="w-4/5 border-b-2 border-b-black text-xl text-white transition-colors duration-500 hover:border-amber-400 focus:outline-none"
-                placeholder="UserName"
-                onChange={handleUserName}
+                placeholder="Email"
+                onChange={(e) => setUsername(e.target.value)}
+                onBlur={handleEmailValid}
                 value={username}
               ></input>
               {/* </div>

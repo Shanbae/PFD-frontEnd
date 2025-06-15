@@ -33,11 +33,14 @@ const RegistrationCred = () => {
             password,
           },
         );
-        console.log(response.data);
-        toast.success("Registration succeed!!!");
+        if (response.status === 200) {
+          console.log(response.data);
+          toast.success("Registration succeed!!!");
+        }
       } catch (error) {
         console.error(
           toast.error("Registration failed!!!"),
+          toast.error("This User Already link with our Organization!!!"),
           error.response ? error.response.data : error.message,
         );
       }
