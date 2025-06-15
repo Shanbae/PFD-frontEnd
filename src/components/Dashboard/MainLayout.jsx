@@ -14,11 +14,15 @@ const MainLayout = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     api
-      .get("https://localhost:7207/api/Login/DashBoard", {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .get(
+        //"https://localhost:7207/api/Login/DashBoard",
+        `${import.meta.env.VITE_REA}/api/Login/DashBoard`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
         setdashBoardData(response.data);
       })
