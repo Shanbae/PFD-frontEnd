@@ -18,8 +18,8 @@ const MainLayout = () => {
     setTimeout(() => {
       api
         .get(
-          "https://localhost:7207/api/Login/DashBoard",
-          //`${import.meta.env.VITE_REA}/api/Login/DashBoard`,
+          //"https://localhost:7207/api/Login/DashBoard",
+          `${import.meta.env.VITE_REA}/api/Login/DashBoard`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
