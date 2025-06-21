@@ -4,32 +4,41 @@ import Sidebar from "../Dashboard/Sidebar";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import api from "../../api";
+import DashboardLoader from "../DashBoardLoader";
 const MainLayout = () => {
   const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   const [dashBoardData, setdashBoardData] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleSideBar = () => {
     setSideBarIsOpen(!sideBarIsOpen);
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    api
-      .get(
-        //"https://localhost:7207/api/Login/DashBoard",
-        `${import.meta.env.VITE_REA}/api/Login/DashBoard`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    setTimeout(() => {
+      api
+        .get(
+          "https://localhost:7207/api/Login/DashBoard",
+          //`${import.meta.env.VITE_REA}/api/Login/DashBoard`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        },
-      )
-      .then((response) => {
-        setdashBoardData(response.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        )
+        .then((response) => {
+          setdashBoardData(response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => setLoading(false));
+    }, 3000);
   }, []);
+  if (isLoading) {
+    return <DashboardLoader />;
+  }
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}

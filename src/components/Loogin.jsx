@@ -33,8 +33,8 @@ const Loogin = () => {
   const handleLogin = async () => {
     try {
       const response = await api.post(
-        //"https://localhost:7207/api/Login/Login", //this only for localhost
-        `${import.meta.env.VITE_REA}/api/Login/Login`,
+        "https://localhost:7207/api/Login/Login", //this only for localhost
+        //`${import.meta.env.VITE_REA}/api/Login/Login`,
         {
           username,
           password,
@@ -45,14 +45,10 @@ const Loogin = () => {
         },
       );
 
-      console.log(response.data);
-      console.log(response.status);
-
       if (response.status === 200) {
         toast.success("User loggedin!!!");
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("username", response.data.user.name);
-        alert(response.data.user.name);
 
         navigate("/Dashboard");
       } else {
@@ -117,7 +113,7 @@ const Loogin = () => {
             <div className="container mt-7 h-10 w-full pl-15"> */}
               {/* <label className="font-sans text-xl font-bold">Password:</label> */}
               <input
-                type="text"
+                type="password"
                 className="w-4/5 border-b-2 border-b-black pt-7 text-xl text-white transition-colors duration-500 hover:border-amber-400 focus:outline-none"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
